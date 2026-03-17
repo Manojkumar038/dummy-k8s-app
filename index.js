@@ -1,7 +1,7 @@
 const express = require('express')
 const path = require('path')
 
-const port = process.env.PORT || 5006
+const port = process.env.PORT || 5000
 
 const app = express()
 
@@ -14,7 +14,11 @@ app.get('/', (req, res) => {
   res.render('pages/index')
 })
 
-const server = app.listen(port, () => {
+app.get('/health', (req, res) => {
+  res.status(200).json({ status: 'OK' });
+});
+
+const server = app.listen(port, '0.0.0.0', () => {
   console.log(`Listening on ${port}`)
 })
 
