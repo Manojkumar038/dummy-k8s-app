@@ -1,66 +1,51 @@
-# nodejs-getting-started
+# Digital Banking Platform (Synthetic Engineering Demo)
 
-A barebones Node.js app using [Express](https://expressjs.com/).
+A deliberately synthetic application repository used to exercise Jira-to-GitHub traceability and an Engineering Intelligence analysis agent. This is **not** a real banking system and must not be used for real financial activity.
 
-This application supports the tutorials for both the [Cedar and Fir generations](https://devcenter.heroku.com/articles/generations) of the Heroku platform. You can check them out here:
+## Project scope
 
-* [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-* [Getting Started on Heroku Fir with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs-fir)
+- Authentication and security (F1): registration, login, password reset, MFA, session expiry.
+- Account and beneficiary management (F2): account overview, transaction history, profile updates, beneficiary verification.
+- Payments, transfers and notifications (F3): simulated UPI, IMPS, NEFT and RTGS flows, receipts and transaction alerts.
 
-## Running Locally
+## Technology target
 
-Make sure you have [Node.js](http://nodejs.org/) and the [Heroku CLI](https://cli.heroku.com/) installed.
+- Backend: Java 21, Spring Boot, Maven
+- Frontend: React
+- Data: PostgreSQL
+- CI: GitHub Actions
+- Container target: Docker; deployment events are simulated unless explicitly configured.
 
-```sh
-$ git clone https://github.com/heroku/nodejs-getting-started.git # or clone your own fork
-$ cd nodejs-getting-started
-$ npm install
-$ npm start
-```
+The current repository intentionally uses **dummy files and metadata**, not a production banking implementation.
 
-Your app should now be running on [localhost:5006](http://localhost:5006/).
+## Jira and Git conventions
 
-## Deploying to Heroku
+- Epic: EPIC-100
+- Features: F1, F2, F3
+- User stories: US101–US118
+- Branches: `feature/F1-auth-security`, `feature/F2-account-beneficiaries`, `feature/F3-payments-notifications`
+- Story branches: `story/us101` etc.
+- Commit messages: `[US101] Add synthetic registration fixture` or `[F1] Update authentication test data`
+- PR titles and bodies should reference the corresponding Jira story IDs.
 
-Using resources for this example app counts towards your usage. [Delete your app](https://devcenter.heroku.com/articles/heroku-cli-commands#heroku-apps-destroy) and [database](https://devcenter.heroku.com/articles/heroku-postgresql#removing-the-add-on) as soon as you are done experimenting to control costs.
-
-### Deploy on [Cedar][cedar]
-
-By default, apps use Eco dynos on [Cedar][cedar] if you are subscribed to Eco. Otherwise, it defaults to Basic dynos. The 
-Eco dynos plan is shared across all Eco dynos in your account and is recommended if you plan on deploying many small apps 
-to Heroku. Learn more about our low-cost plans [here](https://blog.heroku.com/new-low-cost-plans).
-
-Eligible students can apply for platform credits through our new [Heroku for GitHub Students program](https://blog.heroku.com/github-student-developer-program).
+## Repository layout
 
 ```
-$ heroku create
-$ git push heroku main
-$ heroku open
+backend/                 # synthetic Spring Boot project fixtures
+frontend/                # synthetic React project fixtures
+database/                # PostgreSQL schema fixtures
+docs/                    # project, Jira and simulation documentation
+tests/                   # synthetic test fixtures
+.github/workflows/       # lightweight validation workflows
 ```
 
-### Deploy on [Fir][fir]
+## Historical-data integrity
 
-By default, apps on [Fir][fir] use 1X-Classic dynos. To create an app on [Fir][fir] you'll need to 
-[create a private space](https://devcenter.heroku.com/articles/working-with-private-spaces#create-a-private-space)
-first.
+Backdated Git commit author/committer dates can be used for **synthetic commit history**. GitHub PR creation, review, Actions run and deployment timestamps are platform-generated events and cannot honestly be backdated through normal GitHub operations. Any simulated historical PR/review/deployment records must be stored separately and explicitly labelled `synthetic`; actual GitHub events must be labelled `actual`.
 
-```
-$ heroku spaces:create <space-name> --team <team-name> --generation fir
-$ heroku create --space <space-name>
-$ git push heroku main
-$ heroku open
-```
+## Safety
 
-## Documentation
-
-For more information about using Node.js on Heroku, see these Dev Center articles:
-
-- [Getting Started on Heroku with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs)
-- [Getting Started on Heroku Fir with Node.js](https://devcenter.heroku.com/articles/getting-started-with-nodejs-fir)
-- [Heroku Node.js Support](https://devcenter.heroku.com/articles/nodejs-support)
-- [Node.js on Heroku](https://devcenter.heroku.com/categories/nodejs)
-- [Best Practices for Node.js Development](https://devcenter.heroku.com/articles/node-best-practices)
-- [Using WebSockets on Heroku with Node.js](https://devcenter.heroku.com/articles/node-websockets)
-
-[cedar]: https://devcenter.heroku.com/articles/generations#cedar
-[fir]: https://devcenter.heroku.com/articles/generations#fir
+- No real credentials, customer data, bank account details, payment rails or external banking integrations.
+- Payment examples are fixtures only.
+- Never add secrets to this public repository.
+- Use GitHub Actions only for harmless validation tasks.
